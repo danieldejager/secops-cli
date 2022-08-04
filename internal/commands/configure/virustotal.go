@@ -23,7 +23,7 @@ var virustotalCmd = &cobra.Command{
 	Long:  `The SECOPS CLI is a fully functional Command Line Interface (CLI) that interacts with a variety of security related applications`,
 	Run: func(cmd *cobra.Command, args []string) {
 		SetConfigProperty(params.VirusTotalAPIKey, apiKey)
-		fmt.Printf("Configured API Key [%s]", MaskKey(viper.GetString(params.VirusTotalAPIKey)))
+		fmt.Printf("Configured VirusTotal API Key [%s]", MaskKey(viper.GetString(params.VirusTotalAPIKey))
 	},
 }
 
