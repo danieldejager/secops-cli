@@ -1,5 +1,5 @@
 /*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+Copyright © 2022 DANIEL DE JAGER <daniel.dejager.au@gmail.com>
 
 */
 package configure
@@ -8,7 +8,10 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
+
+const maskLimit = 4
 
 // ConfigureCmd represents the configure command
 var ConfigureCmd = &cobra.Command{
@@ -31,4 +34,21 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// configureCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+}
+
+func SetConfigProperty(propName, propValue string) {
+	viper.Set(propName, propValue)
+	if viperErr := viper.SafeWriteConfig(); viperErr != nil {
+		_ = viper.WriteConfig()
+	}
+}
+
+func MaskKey(key string) string {
+	if len(key) > maskLimit {
+		return "******" + key[len(key)-4:]
+	} else if len(key) > 1 {
+		return "******"
+	} else {
+		return ""
+	}
 }

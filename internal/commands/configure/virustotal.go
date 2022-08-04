@@ -7,7 +7,9 @@ package configure
 import (
 	"fmt"
 
+	"github.com/danieldejager/secops-cli/internal/params"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var (
@@ -20,13 +22,17 @@ var virustotalCmd = &cobra.Command{
 	Short: "The virustotal command allows you to configure keys required to work with the VirusTotal API",
 	Long:  `The SECOPS CLI is a fully functional Command Line Interface (CLI) that interacts with a variety of security related applications`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("virustotal called")
+		SetConfigProperty(params.VirusTotalAPIKey, apiKey)
+		fmt.Printf("Configured API Key [%s]", MaskKey(viper.GetString(params.VirusTotalAPIKey)))
 	},
 }
 
 func init() {
 
 	virustotalCmd.Flags().StringVarP(&apiKey, "apikey", "k", "", "Sets the value of the API Key to use with VirusTotal")
+
+	virustotalCmd.MarkFlagRequired("apikey")
+
 	ConfigureCmd.AddCommand(virustotalCmd)
 	// Here you will define your flags and configuration settings.
 
