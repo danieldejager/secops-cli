@@ -1,18 +1,19 @@
 package wrappers
 
-type File struct {
-	Capabilities          []string   `json:"capabilities_tags"`
-	CreationDate          int        `json:"creation_date"`
-	FirstSubmissionDate   int        `json:"first_submission_date"`
-	LastAnalysisDate      int        `json:"last_analysis_date"`
-	AnalysisResults       []Analysis `json:"last_analysis_results"`
-	LastModificationDate  int        `json:"last_modification_date"`
-	LastSubmissionDate    int        `json:"last_submission_date"`
-	MalwareMeaningFulName string     `json:"meaningful_name"`
-	MalwareNames          []string   `json:"names"`
-	MD5                   string     `json:"md5"`
-	SHA1                  string     `json:"sha1"`
-	SHA256                string     `json:"sha256"`
+type VirusTotalResponse struct {
+	Attributes            []string     `json:"capabilities_tags"`
+	CreationDate          int          `json:"creation_date"`
+	FirstSubmissionDate   int          `json:"first_submission_date"`
+	LastAnalysisDate      int          `json:"last_analysis_date"`
+	ImportListData        []ImportList `json:"import_list"`
+	AnalysisResults       []Analysis   `json:"last_analysis_results"`
+	LastModificationDate  int          `json:"last_modification_date"`
+	LastSubmissionDate    int          `json:"last_submission_date"`
+	MalwareMeaningfulName string       `json:"meaningful_name"`
+	MalwareNames          []string     `json:"names"`
+	MD5                   string       `json:"md5"`
+	SHA1                  string       `json:"sha1"`
+	SHA256                string       `json:"sha256"`
 }
 
 type Analysis struct {
@@ -24,6 +25,15 @@ type Analysis struct {
 	Result        string `json:"result"`
 }
 
-type VirusTotal interface {
-	GetFileIntel(hash string) (File, error)
+type ImportList struct {
+	LibraryName       string                     `json:"library_name"`
+	ImportedFunctions []ImportedFunctionsEntries `json:"imported_functions"`
+}
+
+type ImportedFunctionsEntries struct {
+	Function []string
+}
+
+type VirusTotalWrapper interface {
+	GetFileAnalysis(hash string) (VirusTotalResponse, error)
 }

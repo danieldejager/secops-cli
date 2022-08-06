@@ -23,7 +23,7 @@ var virustotalCmd = &cobra.Command{
 	Long:  `The SECOPS CLI is a fully functional Command Line Interface (CLI) that interacts with a variety of security related applications`,
 	Run: func(cmd *cobra.Command, args []string) {
 		SetConfigProperty(params.VirusTotalAPIKey, apiKey)
-		fmt.Printf("Configured VirusTotal API Key [%s]", MaskKey(viper.GetString(params.VirusTotalAPIKey))
+		fmt.Printf("Configured VirusTotal API Key [%s]", MaskKey(viper.GetString(params.VirusTotalAPIKey)))
 	},
 }
 
@@ -34,13 +34,5 @@ func init() {
 	virustotalCmd.MarkFlagRequired("apikey")
 
 	ConfigureCmd.AddCommand(virustotalCmd)
-	// Here you will define your flags and configuration settings.
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// virustotalCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// virustotalCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

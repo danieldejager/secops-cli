@@ -7,5 +7,6 @@ package main
 import "github.com/danieldejager/secops-cli/cmd"
 
 func main() {
+
 	cmd.Execute()
 }
