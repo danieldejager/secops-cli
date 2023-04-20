@@ -17,7 +17,7 @@ var (
 )
 
 // virustotalCmd represents the virustotal command
-var virustotalCmd = &cobra.Command{
+var ConfigureVirustotalCmd = &cobra.Command{
 	Use:   "virustotal",
 	Short: "The virustotal command allows you to configure keys required to work with the VirusTotal API",
 	Long:  `The SECOPS CLI is a fully functional Command Line Interface (CLI) that interacts with a variety of security related applications`,
@@ -29,10 +29,10 @@ var virustotalCmd = &cobra.Command{
 
 func init() {
 
-	virustotalCmd.Flags().StringVarP(&apiKey, "apikey", "k", "", "Sets the value of the API Key to use with VirusTotal")
+	ConfigureVirustotalCmd.Flags().StringVarP(&apiKey, "apikey", "k", "", "Sets the value of the API Key to use with VirusTotal")
 
-	virustotalCmd.MarkFlagRequired("apikey")
+	ConfigureVirustotalCmd.MarkFlagRequired("apikey")
 
-	ConfigureCmd.AddCommand(virustotalCmd)
+	ConfigureCmd.AddCommand(ConfigureVirustotalCmd)
 
 }

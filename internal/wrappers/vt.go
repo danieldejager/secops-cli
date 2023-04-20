@@ -1,6 +1,6 @@
 package wrappers
 
-type VirusTotalResponse struct {
+type VirusTotalResponseModel struct {
 	Attributes            []string     `json:"capabilities_tags"`
 	CreationDate          int          `json:"creation_date"`
 	FirstSubmissionDate   int          `json:"first_submission_date"`
@@ -35,5 +35,5 @@ type ImportedFunctionsEntries struct {
 }
 
 type VirusTotalWrapper interface {
-	GetFileAnalysis(hash string) (VirusTotalResponse, error)
+	GetFileAnalysis(hash string) (*VirusTotalResponseModel, error)
 }
